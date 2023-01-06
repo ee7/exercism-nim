@@ -12,4 +12,4 @@ permissions:
 
 jobs:
   configlet:
-    uses: exercism/github-actions/.github/workflows/configlet.yml@main
+    uses: exercism/github-actions/.github/workflows/configlet.yml@fetch-configlet-gh
