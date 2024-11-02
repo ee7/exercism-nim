@@ -15,10 +15,10 @@ type
   Drink = enum
     Coffee, Tea, Milk, OrangeJuice, Water
 
-  Smoke = enum
-    OldGold, Kools, Chesterfields, LuckyStrike, Parliaments
+  Hobby = enum
+    Dancing, Painting, Reading, Football, Chess
 
-  House = tuple[color: Color, nationality: Nationality, pet: Pet, drink: Drink, smoke: Smoke]
+  House = tuple[color: Color, nationality: Nationality, pet: Pet, drink: Drink, hobby: Hobby]
 
   Solution = array[5, House]
 
@@ -42,15 +42,15 @@ func solve: Solution =
           if drinks[2] != Milk: continue
           if nationalities.find(Ukrainian) != drinks.find(Tea): continue
           if colors.find(Green) != drinks.find(Coffee): continue
-          for cigarettes in permutations[Smoke]():
-            if cigarettes.find(OldGold) != pets.find(Snails): continue
-            if cigarettes.find(Kools) != colors.find(Yellow): continue
-            if cigarettes.find(LuckyStrike) != drinks.find(OrangeJuice): continue
-            if cigarettes.find(Parliaments) != nationalities.find(Japanese): continue
-            if abs(cigarettes.find(Chesterfields) - pets.find(Fox)) != 1: continue
-            if abs(cigarettes.find(Kools) - pets.find(Horse)) != 1: continue
+          for hobby in permutations[Hobby]():
+            if hobby.find(Dancing) != pets.find(Snails): continue
+            if hobby.find(Painting) != colors.find(Yellow): continue
+            if hobby.find(Football) != drinks.find(OrangeJuice): continue
+            if hobby.find(Chess) != nationalities.find(Japanese): continue
+            if abs(hobby.find(Reading) - pets.find(Fox)) != 1: continue
+            if abs(hobby.find(Painting) - pets.find(Horse)) != 1: continue
             for i in result.low..result.high:
-              result[i] = (colors[i], nationalities[i], pets[i], drinks[i], cigarettes[i])
+              result[i] = (colors[i], nationalities[i], pets[i], drinks[i], hobby[i])
             return result
 
 # Calculate solution at compile time.
