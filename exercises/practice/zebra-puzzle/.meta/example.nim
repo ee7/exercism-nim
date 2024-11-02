@@ -18,7 +18,12 @@ type
   Hobby = enum
     Dancing, Painting, Reading, Football, Chess
 
-  House = tuple[color: Color, nationality: Nationality, pet: Pet, drink: Drink, hobby: Hobby]
+  House = object
+    color: Color
+    nationality: Nationality
+    pet: Pet
+    drink: Drink
+    hobby: Hobby
 
   Solution = array[5, House]
 
@@ -27,6 +32,9 @@ iterator permutations[T]: array[5, T] =
   yield term
   while term.nextPermutation():
     yield term
+
+func init(T: typedesc[House], color: Color, nationality: Nationality, pet: Pet, drink: Drink, hobby: Hobby): T =
+  T(color: color, nationality: nationality, pet: pet, drink: drink, hobby: hobby)
 
 func solve: Solution =
   result = default(Solution)
@@ -50,7 +58,7 @@ func solve: Solution =
             if abs(hobby.find(Reading) - pets.find(Fox)) != 1: continue
             if abs(hobby.find(Painting) - pets.find(Horse)) != 1: continue
             for i in result.low..result.high:
-              result[i] = (colors[i], nationalities[i], pets[i], drinks[i], hobby[i])
+              result[i] = House.init(colors[i], nationalities[i], pets[i], drinks[i], hobby[i])
             return result
 
 # Calculate solution at compile time.
